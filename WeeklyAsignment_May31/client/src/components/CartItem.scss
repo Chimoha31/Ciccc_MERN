@@ -1,0 +1,22 @@
+.cartItem_container {
+  width: 100%;
+  height: auto;
+  background-color: aliceblue;
+  & div ul {
+    list-style: none;
+  }
+  & div .item_title {
+    display: flex;
+    justify-content: space-around;
+    padding-left: 0;
+    font-weight: 800;
+  }
+  & .items ul .item_details img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+  & .items ul .item_details p {
+    font-size: small;
+  }
+}

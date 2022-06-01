@@ -1,40 +1,26 @@
 import React from "react";
+import "./CartItem.scss";
 
 const CartItem = () => {
   return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>PRODUCT DETAILS</th>
-            <th>QUANTITY</th>
-            <th>PRICE</th>
-            <th>TOTAL</th>
-          </tr>
-          <tr>
-            <td>
-              <ul>
-                <div>
-                  <li>
-                    <img src="" alt="shopping_item" />
-                  </li>
-                </div>
-                <div>
-                  <li>
-                    <p>Shopping item name</p>
-                  </li>
-                  <li>
-                    <p>Remove</p>
-                  </li>
-                </div>
-              </ul>
-            </td>
-            <td>1</td>
-            <td>$35.60</td>
-            <td>$35.60</td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="cartItem_container">
+      <div>
+        <ul className="item_title">
+          <li>Detail</li>
+          <li>Quantity</li>
+          <li>Price</li>
+        </ul>
+      </div>
+      <div className="items">
+        <ul>
+          <li className="item_details">
+            <img src="https://cdn.shopify.com/s/files/1/2253/9875/products/new-summer-french-bulldog-printed-t-shirt-women-cute-cartoon-t-shirt-pit-bull-tshirt-top-female-frances-german-shepherd-t-shirt--frenchie-world-shop-30020874207381.jpg?v=1619112230" alt="product_item" />
+            <p>French Pug T-shirt</p>
+          </li>
+          <li>1</li>
+          <li>$20.00</li>
+        </ul>
+      </div>
     </div>
   );
 };
