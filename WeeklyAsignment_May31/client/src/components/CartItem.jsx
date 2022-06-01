@@ -14,11 +14,23 @@ const CartItem = () => {
       <div className="items">
         <ul>
           <li className="item_details">
-            <img src="https://cdn.shopify.com/s/files/1/2253/9875/products/new-summer-french-bulldog-printed-t-shirt-women-cute-cartoon-t-shirt-pit-bull-tshirt-top-female-frances-german-shepherd-t-shirt--frenchie-world-shop-30020874207381.jpg?v=1619112230" alt="product_item" />
-            <p>French Pug T-shirt</p>
+            <p>*Pug T-shirt</p>
+            <img
+              src="https://cdn.shopify.com/s/files/1/2253/9875/products/new-summer-french-bulldog-printed-t-shirt-women-cute-cartoon-t-shirt-pit-bull-tshirt-top-female-frances-german-shepherd-t-shirt--frenchie-world-shop-30020874207381.jpg?v=1619112230"
+              alt="product_item"
+            />
           </li>
-          <li>1</li>
-          <li>$20.00</li>
+          <li className="item_quantity">
+            <div>
+              <h5>-</h5>
+              <p className="quantity">1</p>
+              <h5>+</h5>
+            </div>
+          </li>
+          <li className="item_total">
+            <p>$20.00</p>
+            <span>🗑</span>
+          </li>
         </ul>
       </div>
     </div>
