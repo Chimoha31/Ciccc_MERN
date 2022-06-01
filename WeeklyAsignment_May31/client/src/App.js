@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import "./App.scss"
+import Cart from './components/Cart';
 
 const App = () => {
   return (
     <div>
-      App
+      <Cart />
     </div>
   )
 }
