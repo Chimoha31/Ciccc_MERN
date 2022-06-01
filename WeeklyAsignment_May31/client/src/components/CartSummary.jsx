@@ -8,32 +8,32 @@ const CartSummary = () => {
       <div className="border">{/* border */}</div>
       <div>
         <ul>
-          <li>
+          <li className="summary_preTotal">
             <p>PRE TOTAL</p>
             <p>$215.00</p>
           </li>
-          <li>
-            <p>SHIPPING</p>
+          <li className="summary_options">
+            <p>-SHIPPING</p>
             <select>
               <option value="stardard">Standard Delivery - $5.00</option>
               <option value="fast">Fast Delivery - $10.00</option>
             </select>
           </li>
-          <li>
-            <p>PROMO CODE</p>
+          <li className="summary_promo">
+            <p>-PROMO CODE</p>
             <input type="text" placeholder="Enter your code" />
           </li>
-          <li>
+          <li className="summary_apply">
             <button>APPLY</button>
           </li>
         </ul>
       </div>
       <div className="border">{/* border */}</div>
-      <div>
+      <div className="summary_totalCost">
         <p>TOTAL COST</p>
         <p>$220.00</p>
       </div>
-      <div>
+      <div className="summary_checkout">
         <button>CHECKOUT</button>
       </div>
     </div>
