@@ -1,0 +1,11 @@
+.upload_container {
+  padding: 30px;
+  text-align: center;
+  background: antiquewhite;
+  box-shadow: 0px 5px 5px rgba(0,0,0,0);
+}
+
+img {
+  width: 300px;
+  height: 300px;
+}
