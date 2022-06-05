@@ -1,3 +1,4 @@
+const { findByIdAndDelete } = require("../models/item");
 const Item = require("../models/item");
 
 // Get All students data
@@ -24,7 +25,7 @@ const createItem = (req, res) => {
   const newItem = {
     itemName: req.body.itemName,
     quantity: req.body.quantity,
-    price: req.body.quantity,
+    price: req.body.price,
     image: req.body.image,
   };
 
@@ -48,8 +49,24 @@ const createItem = (req, res) => {
 // // update a student data
 
 // // delete a student data
+const deleteItem = (req, res) => {
+  const id = req.params.id;
+
+  Item.findByIdAndDelete({_id: id}).then((data) => {
+    res.status(200).json({
+      message: "Successfully deleted item",
+      data: data,
+    })
+  }).catch((err) => {
+    res.status(500).json({
+      message: "Successfully deleted item",
+      err: err
+    })
+  })
+}
 
 module.exports = {
   getItems,
-  createItem
+  createItem,
+  deleteItem,
 };

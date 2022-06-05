@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import "./CartItem.scss";
 import axiox from "axios";
+// import { deleteItem, getItems } from "../../../server/controller/item";
+import axios from "axios";
 
 const CartItem = () => {
   // const [itemName, setItemName] = useState("");
@@ -25,7 +27,17 @@ const CartItem = () => {
 
   useEffect(() => {
     handleGetItems();
+    // eslint-disable-next-line
   }, []);
+
+  const handleDeleteItem =  async (id) => {
+   axios.delete(`http://localhost:5000/api/v1/items/${id}`)
+      .then((res) => {
+        handleGetItems();
+      }).catch((err) => {
+        console.log(err);
+      })
+  };
 
   return (
     <Fragment>
@@ -44,10 +56,7 @@ const CartItem = () => {
           <div className="items" key={item._id}>
             <ul>
               <li className="item_details">
-                <img
-                  src={item.image}
-                  alt="product_item"
-                />
+                <img src={item.image} alt="product_item" />
                 <p className="item_name">*{item.itemName}</p>
               </li>
               <li className="item_quantity">
@@ -58,8 +67,8 @@ const CartItem = () => {
                 </div>
               </li>
               <li className="item_total">
-                <p>{item.price}</p>
-                <span>🗑</span>
+                <p>${item.price}</p>
+                <span onClick={() => handleDeleteItem(item._id)}>🗑</span>
               </li>
             </ul>
           </div>
