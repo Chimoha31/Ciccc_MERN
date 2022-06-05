@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {getItems} = require("../controller/item");
+const {getItems, createItem} = require("../controller/item");
 
 // Get All items data
 router.get("/", getItems);
@@ -9,7 +9,7 @@ router.get("/", getItems);
 // router.get("/:id", getItemById);
 
 // // post(Create) a item data
-// router.post("/", createItem); 
+router.post("/", createItem); 
 
 // // update a item data
 // router.put("/:id", updateItem);

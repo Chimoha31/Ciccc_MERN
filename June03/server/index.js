@@ -23,6 +23,8 @@ app.get("/", (req, res) => {
   res.send("API ENDPOINT");
 });
 
+
+//  controller
 app.post("/api/v1/upload", (req, res) => {
   cloudinary.uploader.upload("req.body.image", function (err, result) {
     if(err) {
