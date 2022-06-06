@@ -1,10 +1,10 @@
 const { findByIdAndDelete } = require("../models/item");
 const Item = require("../models/item");
-var cloudinary = require('cloudinary').v2;
+var cloudinary = require("cloudinary").v2;
 
-const {NAME, API_KEY, API_SECRET} = process.env;
+const { NAME, API_KEY, API_SECRET, CLOUDINARY_URL } = process.env;
 
-cloudinary.config({ 
+cloudinary.config({
   cloud_name: NAME,
   api_key: API_KEY,
   api_secret: API_SECRET,
@@ -31,28 +31,28 @@ const getItems = (req, res) => {
 // Get a student data
 
 // // post(Create) a student data
-const createItem = (req, res) => {
-  const newItem = {
-    itemName: req.body.itemName,
-    quantity: req.body.quantity,
-    price: req.body.price,
-    image: req.body.image,
-  };
-
-  const item = new Item(newItem);
+const createItem = async (req, res) => {
+  const { itemName, quantity, price, image } = req.body;
 
   try {
-    const data = item.save();
-    
-    res.status(201).json({
-      message: "Successfully created a student data !",
-      data: data,
-    });
+    if (image) {
+      const uploadRes = await cloudinary.uploader.upload(image, {
+        upload_preset: "gvme62r1",
+      });
+      const savedItem = await item.save();
+      const cloudinaryUrl = CLOUDINARY_URL;
+
+      const item = new Item({
+        itemName,
+        quantity,
+        price,
+        image: cloudinaryUrl,
+      });
+      req.statusCode(201).send(savedItem);
+    }
   } catch (err) {
-    res.status(500).json({
-      message: "Successfully created a student data !",
-      err: err,
-    });
+    console.log(err);
+    res.status(500).send(err);
   }
 };
 
@@ -62,18 +62,20 @@ const createItem = (req, res) => {
 const deleteItem = (req, res) => {
   const id = req.params.id;
 
-  Item.findByIdAndDelete({_id: id}).then((data) => {
-    res.status(200).json({
-      message: "Successfully deleted item",
-      data: data,
+  Item.findByIdAndDelete({ _id: id })
+    .then((data) => {
+      res.status(200).json({
+        message: "Successfully deleted item",
+        data: data,
+      });
     })
-  }).catch((err) => {
-    res.status(500).json({
-      message: "Successfully deleted item",
-      err: err
-    })
-  })
-}
+    .catch((err) => {
+      res.status(500).json({
+        message: "Successfully deleted item",
+        err: err,
+      });
+    });
+};
 
 module.exports = {
   getItems,

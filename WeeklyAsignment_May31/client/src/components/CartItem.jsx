@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import "./CartItem.scss";
-import axiox from "axios";
-// import { deleteItem, getItems } from "../../../server/controller/item";
 import axios from "axios";
+import { db } from "../firebase/Firebase";
+import { getDocs, collection, addDoc } from "firebase/firestore";
 
 const CartItem = () => {
   // const [itemName, setItemName] = useState("");
@@ -11,9 +11,12 @@ const CartItem = () => {
   // const [price, setPrice] = useState("");
   // const [image, setImage] = useState("");
   const [itemsList, setItemsList] = useState([]);
+  const [selectedImage, setSelectedImage] = useState("");
+  const photosCollectionRef = collection(db, "photos");
 
+  // Get All Items
   const handleGetItems = async () => {
-    await axiox
+    await axios
       .get("http://localhost:5000/api/v1/items")
       .then((res) => {
         // alert(res.message);
@@ -30,6 +33,16 @@ const CartItem = () => {
     // eslint-disable-next-line
   }, []);
 
+
+  // Create Item
+  const handleCreateItem = async () => {
+    const formData = new FormData();
+
+    formData.append("file", )
+  }
+
+
+  // Delete Item
   const handleDeleteItem =  async (id) => {
    axios.delete(`http://localhost:5000/api/v1/items/${id}`)
       .then((res) => {
@@ -77,6 +90,7 @@ const CartItem = () => {
         <div className="continue">
           <p>←Continue Shopping</p>
           <button onClick={handleGetItems}>Refresh</button>
+          <button onClick={handleCreateItem}>Refresh</button>
         </div>
       </div>
     </Fragment>

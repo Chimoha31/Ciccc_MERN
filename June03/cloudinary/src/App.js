@@ -6,9 +6,9 @@ import { getDocs, collection, addDoc } from "firebase/firestore";
 
 const App = () => {
   const [selectedImage, setSelectedImage] = useState("");
-  const photosCollectionRef = collection(db, "photos");
   const [images, setImages] = useState([]);
   const [wasImageUploaded, setImageUploaded] = useState(false);
+  const photosCollectionRef = collection(db, "photos");
 
   const {
     REACT_APP_CLOUDINARY_PRESET,
@@ -35,7 +35,7 @@ const App = () => {
   const handleUpload = async () => {
     const formData = new FormData();
     // step1
-    const a = formData.append("file", selectedImage);
+    formData.append("file", selectedImage);
     console.log(a);
     // step2
     formData.append("upload_preset", REACT_APP_CLOUDINARY_PRESET);
