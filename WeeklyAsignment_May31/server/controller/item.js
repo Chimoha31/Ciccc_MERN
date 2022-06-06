@@ -1,5 +1,15 @@
 const { findByIdAndDelete } = require("../models/item");
 const Item = require("../models/item");
+var cloudinary = require('cloudinary').v2;
+
+const {NAME, API_KEY, API_SECRET} = process.env;
+
+cloudinary.config({ 
+  cloud_name: NAME,
+  api_key: API_KEY,
+  api_secret: API_SECRET,
+  secure: true,
+});
 
 // Get All students data
 const getItems = (req, res) => {
