@@ -2,7 +2,7 @@ const { findByIdAndDelete } = require("../models/item");
 const Item = require("../models/item");
 var cloudinary = require("cloudinary").v2;
 
-const { NAME, API_KEY, API_SECRET, CLOUDINARY_URL } = process.env;
+const { NAME, API_KEY, API_SECRET, CLOUDINARY_API} = process.env;
 
 cloudinary.config({
   cloud_name: NAME,
@@ -30,31 +30,39 @@ const getItems = (req, res) => {
 
 // Get a student data
 
-// // post(Create) a student data
-const createItem = async (req, res) => {
+// // post(Create) a item data
+const createItem = (req, res) => {
   const { itemName, quantity, price, image } = req.body;
 
-  try {
-    if (image) {
-      const uploadRes = await cloudinary.uploader.upload(image, {
-        upload_preset: "gvme62r1",
-      });
-      const savedItem = await item.save();
-      const cloudinaryUrl = CLOUDINARY_URL;
-
-      const item = new Item({
-        itemName,
-        quantity,
-        price,
-        image: cloudinaryUrl,
-      });
-      req.statusCode(201).send(savedItem);
+  cloudinary.uploader.upload("req.body.image", function (err, result) {
+    const newItem = {
+      itemName,
+      quantity,
+      price,
+      image,
     }
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
-  }
-};
+    const item = new Item(newItem)
+
+    const cloudinary_API = CLOUDINARY_API
+    console.log(cloudinary_API)
+
+    if(err) {
+      return res.status(500).json({
+        err: err
+      })
+    }
+    if(result) {
+      const data = item.save();
+      return res.status(201).json({
+        data: data,
+        message: "Successfully uploaded the image !"
+      })
+    }
+  });
+}
+
+
+
 
 // // update a student data
 

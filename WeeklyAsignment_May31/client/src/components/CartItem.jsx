@@ -90,7 +90,6 @@ const CartItem = () => {
         <div className="continue">
           <p>←Continue Shopping</p>
           <button onClick={handleGetItems}>Refresh</button>
-          <button onClick={handleCreateItem}>Refresh</button>
         </div>
       </div>
     </Fragment>

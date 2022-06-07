@@ -31,5 +31,5 @@ app.use("/api/v1/items", ItemRoutes)
 
 //------------------------------------------------------
 app.listen(PORT, () => {
-  console.log("Teddy is running 🐶 !");
+  console.log("Server is running 🐶 !");
 });

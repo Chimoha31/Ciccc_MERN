@@ -10,7 +10,7 @@ const CartSummary = () => {
         <ul>
           <li className="summary_preTotal">
             <p>PRE TOTAL</p>
-            <p>$215.00</p>
+            <p>$231.00</p>
           </li>
           <li className="summary_options">
             <p>-SHIPPING</p>
@@ -31,7 +31,7 @@ const CartSummary = () => {
       <div className="border">{/* border */}</div>
       <div className="summary_totalCost">
         <p>TOTAL COST</p>
-        <p>$220.00</p>
+        <p>$226.00</p>
       </div>
       <div className="summary_checkout">
         <button>CHECKOUT</button>
