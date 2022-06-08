@@ -13,34 +13,37 @@ const App = () => {
 
   const enterRoomNumber = (e) => {
     e.preventDefault();
-
-    if(username !== "" && roomNumber !== "") {
+    if (username !== "" && roomNumber !== "") {
       // 何をemit()させたいか＝join_room
-      socket.emit("join_room", {username, roomNumber})
-    }else{
+      socket.emit("join_room", { username, roomNumber });
+      setShowchat(true);
 
+    } else {
     }
   };
 
   return (
     <div className="App">
-      <form className="joinChatContainer" onSubmit={enterRoomNumber}>
-        <h1>Join chat</h1>
-        <input
-          type="text"
-          value={username}
-          placeholder="Enter username"
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <input
-          type="text"
-          value={roomNumber}
-          placeholder="Enter Room Number"
-          onChange={(event) => setRoomNumber(event.target.value)}
-        />
-        <button type="submit">Enter</button>
-      </form>
-      {/* <Chat socket={socket} roomNumber={roomNumber} username={username} />} */}
+      {!showChat ? (
+        <form className="joinChatContainer" onSubmit={enterRoomNumber}>
+          <h1>Join chat</h1>
+          <input
+            type="text"
+            value={username}
+            placeholder="Enter username"
+            onChange={(event) => setUsername(event.target.value)}
+          />
+          <input
+            type="text"
+            value={roomNumber}
+            placeholder="Enter Room Number"
+            onChange={(event) => setRoomNumber(event.target.value)}
+          />
+          <button type="submit">Enter</button>
+        </form>
+      ) : (
+        <Chat socket={socket} roomNumber={roomNumber} username={username} />
+      )}
     </div>
   );
 };
