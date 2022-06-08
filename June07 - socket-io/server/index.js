@@ -24,6 +24,16 @@ io.on("connection", (socket) => {
 
     console.log(`${data.username} connected with ID ${data.id} has joined room: ${data.roomNumber}`)
   });
+  socket.on('send_message', (data) => {
+    // to()=>どのroomにmessageをsendするか
+    socket.to(data.room).emit('receive_message', data)
+    console.log(data);
+  })
+  // disconnect
+  socket.on('disconnect', (data) => {
+    console.log("User left: ", data);
+    socket.emit('left_chat', socket.id);
+  })
 });
 
 server.listen(PORT, () => {

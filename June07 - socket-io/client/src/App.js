@@ -14,7 +14,7 @@ const App = () => {
   const enterRoomNumber = (e) => {
     e.preventDefault();
     if (username !== "" && roomNumber !== "") {
-      // 何をemit()させたいか＝join_room
+      // 何をemit()させたいか＝join_room = { username, roomNumber }
       socket.emit("join_room", { username, roomNumber });
       setShowchat(true);
 

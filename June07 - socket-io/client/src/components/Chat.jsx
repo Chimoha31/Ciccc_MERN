@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Chat = ({username, rommNumber, socket}) => {
+const Chat = ({username, roomNumber, socket}) => {
   const [messageList, setMessageList] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
+
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      console.log(data);
+      setMessageList((list) => [...list, data])
+    });
+
+    socket.on('left_chat', (data) => {
+      console.log("User left id: ", data)
+    })
+
+    console.log(messageList);
+    // eslint-disable-next-line
+  }, [socket])
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
     if(currentMessage !== "") {
       const messageBody = {
-        room: rommNumber,
+        room: roomNumber,
         userName: username,
         message: currentMessage,
         time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
@@ -27,7 +41,7 @@ const Chat = ({username, rommNumber, socket}) => {
       <h1>Live Chat</h1>
       <div className="chat-body">
         {messageList.map((msg, index) => (
-          <div className="message" key={msg.index}>
+          <div className="message" key={index} id={username === msg.userName ? "You" : "Other"} >
             <div className="message-container">
               <div className="message-content">
                 <p>{msg.message}</p>
