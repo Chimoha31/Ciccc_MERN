@@ -18,9 +18,9 @@ const Home = () => {
         <div className="popup">
           <div>
             <h1>Let's Chat with your friends</h1>
-            <p>This is chat app </p>
+            <p>- This is chat app -</p>
             <LinkContainer to="/joinroom">
-              <Button variant="success">
+              <Button variant="success" className="start_btn">
                 Get Started
                 <i className="fas fa-comments home-message-icon"></i>
               </Button>

@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("https://thumbs.dreamstime.com/b/chat-seamless-pattern-vector-minimal-texture-background-made-thin-line-bubbles-66029898.jpg");
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/188/833/non_2x/chat-wallpaper-social-media-message-background-copy-space-for-a-text-vector.jpg");
   background-color: rgba(255, 255, 255, 0.8);
   background-blend-mode: lighten;
   background-position: center;
@@ -39,11 +39,21 @@
   width: 90%;
   height: 250px;
   border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .home-message-icon {
   margin-left: 10px;
   display: inline-block;
+}
+
+.start_btn {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.start_btn:hover {
+  transform: translateY(3px);
+  box-shadow: none;
 }
 
 @media (min-width: 1025px) {
@@ -74,11 +84,26 @@
     width: 90%;
   }
 
+  .start_btn {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+  }
+  .start_btn i {
+    font-size: 1.3rem;
+  }
+
   .popup {
     width: 50%;
     animation: popup 1.5s forwards ease-in-out;
     display: flex;
     justify-content: center;
+  }
+
+  .popup p {
+    font-size: 1.3rem;
   }
 
   @keyframes popup {
