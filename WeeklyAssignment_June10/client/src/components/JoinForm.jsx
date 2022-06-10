@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from './Header';
 import "./JoinForm.css";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const JoinForm = ({ socket }) => {
-  const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
+const JoinForm = ({ socket, username, setUsername, room ,setRoom }) => {
   const navigate = useNavigate();
 
   const handleJoinRoom = () => {

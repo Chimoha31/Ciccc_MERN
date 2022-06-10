@@ -8,15 +8,14 @@ const Header= () => {
   const navigate = useNavigate();
 
   const handleHome = () => {
-    navigate("/")
+    navigate("/");
   }
 
   return (
     <Navbar bg="dark" variant="dark">
     <Container>
       <Nav className="me-auto">
-        <Nav.Link href="#home" onClick={handleHome} style={{fontSize: "1.4rem"}}>Home</Nav.Link>
-        
+        <Nav.Link onClick={handleHome} style={{fontSize: "1.4rem"}}>Home</Nav.Link>
       </Nav>
     </Container>
   </Navbar>
