@@ -1,0 +1,117 @@
+.home {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://thumbs.dreamstime.com/b/chat-seamless-pattern-vector-minimal-texture-background-made-thin-line-bubbles-66029898.jpg");
+  background-color: rgba(255, 255, 255, 0.8);
+  background-blend-mode: lighten;
+  background-position: center;
+  background-size: cover;
+  /* animation: bgscroll 20s linear infinite; */
+}
+
+/* @keyframes bgscroll {
+  0% {background-position: 0 0;}
+  100% {background-position: 0 1000px;}
+ } */
+
+.home_container {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.img_container {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.img_container img {
+  display: inline-block;
+  width: 90%;
+  height: 250px;
+  border-radius: 5px;
+}
+
+.home-message-icon {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+@media (min-width: 1025px) {
+  .home_container {
+    flex-direction: row-reverse;
+    padding: 0 3rem;
+    width: 90%;
+    height: 80%;
+    border: 1px solid rgba(232, 248, 247, 0.781);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    background-color: rgba(232, 238, 248, 0.657);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    border-radius: 60px;
+  }
+
+  .img_container {
+    width: 50%;
+  }
+  .img_container img {
+    height: 350px;
+    width: 90%;
+  }
+
+  .popup {
+    width: 50%;
+    animation: popup 1.5s forwards ease-in-out;
+    display: flex;
+    justify-content: center;
+  }
+
+  @keyframes popup {
+    0% {
+      transform: translateY(200px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(-50px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .popdown {
+    animation: popdown 1.5s forwards ease-in-out;
+  }
+
+  @keyframes popdown {
+    0% {
+      transform: translateY(-200px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(50px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
