@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from './Header';
 import "./JoinForm.css";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ const JoinForm = ({ socket }) => {
 
   return (
     <div className="container_bg">
+      <Header />
       <div className="joinform_container">
         <div className="form">
           <h3>Join A Chat</h3>
