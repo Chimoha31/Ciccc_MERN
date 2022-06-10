@@ -1,15 +1,111 @@
+.container_bg {
+  background-image: url("https://media.istockphoto.com/vectors/group-of-diverse-happy-people-mutiethnic-laughing-and-joyful-together-vector-id1144149538?k=20&m=1144149538&s=612x612&w=0&h=yylhGur5xAOkYt0dj4dbZuNcPxdeQZwCCo5ve1Nc58o=");
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode: lighten;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 
-
-
-/*------------------------------------------------------ */
-.chat-window {
-  width: 300px;
-  height: 420px;
 }
 
-.chat-window p {
-  margin: 0;
+.joinform_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  flex-direction: column-reverse;
 }
+
+.form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 2rem 0;
+  border-radius: 50px;
+  box-shadow: rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  
+}
+.form h3{
+  margin-bottom: 1.8rem;
+  font-size: 2rem;
+}
+
+.form input {
+  width: 70%;
+  margin-bottom: 1.8rem;
+  border-radius: 5px;
+  border: 1px solid rgb(104, 103, 103);
+  padding: 0 10px;
+}
+
+.roomform_btn {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.roomform_btn:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.form_gif {
+  height: 25%;
+  width: 100%;
+  background-image: url("https://seoversite.com/wp-content/uploads/2020/01/giphy.gif");
+  background-color: rgba(255, 255, 255, 0.2);
+  background-blend-mode: lighten;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 1025px) {
+  .joinform_container {
+    width: 95%;
+    flex-direction: row;
+    margin: 0 auto;
+  }
+  
+  .form {
+    width: 50%;
+    height: 50%;
+  }
+
+  .form h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+  
+  .form input {
+    width: 60%;
+    height: 2.5rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .form_gif {
+    height: 100%;
+    width: 50%;
+  }
+
+  .roomform_btn {
+    width: 60%;
+    font-size: 1.1rem;
+  }
+}
+  
+  /*------------------------------------------------------ */
+  .chat-window {
+    width: 300px;
+    height: 420px;
+  }
+  
+  .chat-window p {
+    margin: 0;
+  }
 .chat-window .chat-header {
   height: 45px;
   border-radius: 6px;

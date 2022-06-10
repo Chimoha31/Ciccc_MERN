@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
-import './JoinForm.css'
-import io from "socket.io-client";
-import Chat from "./Chat";
-import { Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import "./JoinForm.css";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const socket = io.connect("http://localhost:3001");
-
-const JoinForm = () => {
+const JoinForm = ({ socket }) => {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
-  const [showChat, setShowChat] = useState(false);
+  const navigate = useNavigate();
 
   const handleJoinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("join_room", room);
-      setShowChat(true);
+      navigate("/chatroom");
     }
   };
 
   return (
-    <div className="joinroom_container">
-      {!showChat ? (
-        <div className="joinChatContainer">
+    <div className="container_bg">
+      <div className="joinform_container">
+        <div className="form">
           <h3>Join A Chat</h3>
           <input
             type="text"
@@ -35,13 +32,15 @@ const JoinForm = () => {
             value={room}
             onChange={(e) => setRoom(e.target.value)}
           />
-          <Button onClick={handleJoinRoom}>Join A Room</Button>
+          <Button onClick={handleJoinRoom} className="roomform_btn">
+            Join A Room
+          </Button>
         </div>
-      ) : (
-        <Chat socket={socket} username={username} room={room} />
-      )}
+
+        <div className="form_gif">{/* {bg} */}</div>
+      </div>
     </div>
   );
-}
+};
 
-export default JoinForm
+export default JoinForm;

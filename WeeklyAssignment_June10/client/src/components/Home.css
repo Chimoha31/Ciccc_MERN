@@ -10,13 +10,7 @@
   background-blend-mode: lighten;
   background-position: center;
   background-size: cover;
-  /* animation: bgscroll 20s linear infinite; */
 }
-
-/* @keyframes bgscroll {
-  0% {background-position: 0 0;}
-  100% {background-position: 0 1000px;}
- } */
 
 .home_container {
   width: 100%;
