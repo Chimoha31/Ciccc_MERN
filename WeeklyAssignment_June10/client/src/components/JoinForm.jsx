@@ -21,7 +21,7 @@ const JoinForm = ({ socket }) => {
       <Header />
       <div className="joinform_container">
         <div className="form">
-          <h3>Join A Chat</h3>
+          <h3> Join A Chat !!</h3>
           <input
             type="text"
             placeholder="Your name"

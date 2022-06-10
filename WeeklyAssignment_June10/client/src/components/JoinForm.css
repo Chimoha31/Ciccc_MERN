@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
 .container_bg {
   background-image: url("https://media.istockphoto.com/vectors/group-of-diverse-happy-people-mutiethnic-laughing-and-joyful-together-vector-id1144149538?k=20&m=1144149538&s=612x612&w=0&h=yylhGur5xAOkYt0dj4dbZuNcPxdeQZwCCo5ve1Nc58o=");
   background-color: rgba(255, 255, 255, 0.7);
@@ -27,13 +28,14 @@
   justify-content: center;
   border: 1px solid #ccc;
   padding: 2rem 0;
-  border-radius: 50px;
+  border-radius: 10px;
   box-shadow: rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   
 }
 .form h3{
   margin-bottom: 1.8rem;
   font-size: 2rem;
+  font-family: 'Rampart One', cursive;
 }
 
 .form input {
@@ -41,7 +43,7 @@
   margin-bottom: 1.8rem;
   border-radius: 5px;
   border: 1px solid rgb(104, 103, 103);
-  padding: 0 10px;
+  padding: 5px 10px;
 }
 
 .roomform_btn {
@@ -76,13 +78,15 @@
   }
 
   .form h3 {
-    font-size: 2.4rem;
+    font-size: 3rem;
+    margin-bottom: 4rem;
     font-weight: 600;
   }
   
   .form input {
     width: 60%;
     height: 2.5rem;
+    padding: 20px 10px;
     margin-bottom: 1.8rem;
   }
   
