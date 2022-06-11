@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Board from './components/Board';
+import Form from './components/Form';
 
 
 const App = () => {
+  const [showGame, setShowGame] = useState(false);
   return (
     <div>
-      <Board />
+      <Form showGame={showGame} setShowGame={setShowGame} />
     </div>
   )
 }
