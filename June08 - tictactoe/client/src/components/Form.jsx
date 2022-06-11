@@ -3,13 +3,16 @@ import { Fragment } from "react";
 import Board from "./Board";
 import "./Form.css";
 
-const Form = ({ showGame, setShowGame }) => {
+const Form = ({ showGame, setShowGame, socket }) => {
   const [username, setUsername] = useState("");
   const [roomNumber, setRoomNumber] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowGame(true);
+    if(username !== "" && roomNumber !== "") {
+      socket.emit("join_room", {username, roomNumber})
+      setShowGame(true);
+    }
   };
   return (
     <Fragment>
@@ -17,7 +20,7 @@ const Form = ({ showGame, setShowGame }) => {
         <input type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} value={username} />
         <input type="text" placeholder="Enter Room" onChange={(e) => setRoomNumber(e.target.value)} value={roomNumber} />
         <button>Join Room</button>
-      </form> : <Board />}
+      </form> : <Board socket={socket} username={username} roomNumber={roomNumber} />}
     </Fragment>
   );
 };

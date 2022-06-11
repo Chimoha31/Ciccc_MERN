@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Square from "./Square";
 
-const Board = () => {
+const Board = ({username, roomNumber, socket}) => {
   const [boardSize, setBoardSize] = useState(new Array(9).fill(0));
   const [player, setPlayer] = useState(1);
 
   useEffect(() => {
-    
-  }, []);
+    socket.on("receive_turn", (data) => {
+
+    })
+    // eslint-disable-next-line
+  }, [socket]);
 
   const winningCombos = [
     [0, 1, 2],

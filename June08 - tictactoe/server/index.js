@@ -1,31 +1,31 @@
-const { Socket } = require("dgram");
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const PORT = 5000;
+const PORT = process.env.PORT || 2000;
 
+app.use(express.json());
+app.use(cors());;
 
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
-    origin: ["GET", "POST"]
+    methods: ["GET", "POST"]
   }
 });
 
-io.on("connection", (data) => {
+io.on("connection", (socket) => {
   socket.on("join_room", (data) => {
     socket.join(data.roomNumber);
     console.log(`${data.username} connected with ID ${socket.id} has joined room: ${data.roomNumber}`);
   })
 
-  socket.on("change_of_turn", (dat) => {
-    socket.to(room).emit("receive_turn", data);
+  socket.on("change_of_turn", (data) => {
+    socket.to(data.roomNumber).emit("receive_turn", data);
   })
 })
-
-
 
 
 app.get("/", (req, res) => {
