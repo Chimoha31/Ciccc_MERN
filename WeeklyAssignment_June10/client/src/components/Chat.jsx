@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./Chat.css";
-import Header from "./Header";
 
 const Chat = ({ socket, username, room }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  // const [isLeftRoom, setIsLeftRoom] = useState("");
+  const navigate = useNavigate();
 
   const handleSendMessage = async () => {
     if (currentMessage !== "") {
@@ -26,21 +28,33 @@ const Chat = ({ socket, username, room }) => {
     }
   };
 
+  const handleLeave = () => {
+    navigate("/joinroom");
+    // window.location.reload();
+  }
+  
   useEffect(() => {
     socket.on("receive_message", (data) => {
       console.log(data);
       setMessageList((list) => [...list, data]);
     });
+    socket.on("left_chat", (data) => {
+      console.log(data)
+    })
     return () => socket.off("receive_message");
-  }, [socket]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Fragment>
-      <Header />
       <div className="chat-window">
         <div className="chat-header">
           <p>Live Chat</p>
+          <div>
+            <p className="leave" onClick={handleLeave}>Leave 👋🏻</p>
+          </div>
         </div>
+
         <div className="chat-body">
           <ScrollToBottom className="message-container">
             {messageList.map((message, index) => (

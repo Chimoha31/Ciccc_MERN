@@ -12,6 +12,8 @@ const JoinForm = ({ socket, username, setUsername, room ,setRoom }) => {
       socket.emit("join_room", room);
       navigate("/chatroom");
     }
+    setUsername("")
+    setRoom("")
   };
 
   return (
