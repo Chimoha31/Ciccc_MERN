@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Square = () => {
+const Square = ({oneSquare, position, handleClick}) => {
   return (
-    <div>
+    <div className={`square mark${oneSquare}`} onClick={handleClick}>
       
     </div>
   )
