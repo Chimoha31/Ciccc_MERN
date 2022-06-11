@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import Form from './components/Form';
+import JoinForm from './components/JoinForm';
 import io from 'socket.io-client';
 
 const socket = io.connect("http://localhost:5000");
@@ -9,7 +9,7 @@ const App = () => {
   const [showGame, setShowGame] = useState(false);
   return (
     <div>
-      <Form showGame={showGame} setShowGame={setShowGame} socket={socket} />
+      <JoinForm showGame={showGame} setShowGame={setShowGame} socket={socket} />
     </div>
   )
 }
