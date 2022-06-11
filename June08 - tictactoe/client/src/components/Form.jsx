@@ -9,18 +9,35 @@ const Form = ({ showGame, setShowGame, socket }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(username !== "" && roomNumber !== "") {
-      socket.emit("join_room", {username, roomNumber})
+    if (username !== "" && roomNumber !== "") {
+      socket.emit("join_room", { username, roomNumber });
       setShowGame(true);
     }
   };
   return (
     <Fragment>
-      {!showGame ? <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} value={username} />
-        <input type="text" placeholder="Enter Room" onChange={(e) => setRoomNumber(e.target.value)} value={roomNumber} />
-        <button>Join Room</button>
-      </form> : <Board socket={socket} username={username} roomNumber={roomNumber} />}
+      {!showGame ? (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
+          <input
+            type="text"
+            placeholder="Enter Room"
+            onChange={(e) => setRoomNumber(e.target.value)}
+            value={roomNumber}
+          />
+          <button>Join Room</button>
+        </form>
+      ) : (
+        <div>
+          <h2>Hello, {username}</h2>
+          <Board socket={socket} username={username} roomNumber={roomNumber} />
+        </div>
+      )}
     </Fragment>
   );
 };

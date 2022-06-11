@@ -4,7 +4,7 @@ const cors = require("cors");
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());;
@@ -23,13 +23,13 @@ io.on("connection", (socket) => {
   })
 
   socket.on("change_of_turn", (data) => {
-    socket.to(data.roomNumber).emit("receive_turn", data);
+    socket.to(data.room).emit("receive_turn", data);
   })
 })
 
 
 app.get("/", (req, res) => {
-  res.send("API ENDPOINT")
+  res.send("API ENDPOINT");
 })
 
 server.listen(PORT, () => {

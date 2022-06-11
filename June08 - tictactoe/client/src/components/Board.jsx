@@ -7,10 +7,14 @@ const Board = ({username, roomNumber, socket}) => {
 
   useEffect(() => {
     socket.on("receive_turn", (data) => {
-
+      console.log(data);
+      setBoardSize(data.boardSize);
+      setPlayer(data.id);
     })
+
+    return () => socket.off("receive_turn")
     // eslint-disable-next-line
-  }, [socket]);
+  }, []);
 
   const winningCombos = [
     [0, 1, 2],
@@ -30,26 +34,34 @@ const Board = ({username, roomNumber, socket}) => {
         boardSize[item[1]] === 1 &&
         boardSize[item[2]] === 1
       ) {
-        alert("Player 1 won the game");
+        alert(`Player 1 won the game`);
       }
       if (
         boardSize[item[0]] === 2 &&
         boardSize[item[1]] === 2 &&
         boardSize[item[2]] === 2
       ) {
-        alert("Player 2 won the game");
+        alert(`Player 2 won the game`);
       }
     }
     // eslint-disable-next-line
   }, [boardSize]);
 
-  const handleClick = (position) => {
+  const handleClick = async (position) => {
     if (boardSize[position] === 0) {
       let tempSize = [...boardSize];
       tempSize[position] = player;
 
       setPlayer(player === 1 ? 2 : 1);
 
+      const playerBody = {
+        username: username,
+        room: roomNumber,
+        id: player === 1 ? 2 : 1,
+        boardSize: tempSize
+      }
+      await socket.emit("change_of_turn", playerBody)
+      
       // click時に1か2かいちいち消えないようにする
       setBoardSize(tempSize);
       console.log(tempSize, player);
