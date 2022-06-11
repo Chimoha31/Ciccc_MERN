@@ -2,14 +2,6 @@
   text-align: center;
 }
 
-.square {
-  width: 150px;
-  height: 150px;
-  display: inline-block;
-  border: 1px solid black;
-  background-size: cover !important;
-  margin: 2px;
-}
 
 .mark1 {
   background: url("./image/circle.png");

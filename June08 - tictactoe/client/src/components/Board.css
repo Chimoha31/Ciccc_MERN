@@ -1,0 +1,23 @@
+.board_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+}
+
+@media (min-width: 767px) {
+  .board {
+    width: 600px;
+  }
+}

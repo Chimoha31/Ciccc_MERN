@@ -1,0 +1,15 @@
+.square {
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  border: 1px solid black;
+  background-size: cover !important;
+  margin: 2px;
+}
+
+@media (min-width: 767px) {
+  .square {
+    width: 180px;
+    height: 180px;
+  }
+}

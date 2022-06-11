@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Square from "./Square";
+import "./Board.css";
 
-const Board = ({username, roomNumber, socket}) => {
+const Board = ({ username, roomNumber, socket }) => {
   const [boardSize, setBoardSize] = useState(new Array(9).fill(0));
   const [player, setPlayer] = useState(1);
 
@@ -10,9 +11,9 @@ const Board = ({username, roomNumber, socket}) => {
       console.log(data);
       setBoardSize(data.boardSize);
       setPlayer(data.id);
-    })
+    });
 
-    return () => socket.off("receive_turn")
+    return () => socket.off("receive_turn");
     // eslint-disable-next-line
   }, []);
 
@@ -58,29 +59,31 @@ const Board = ({username, roomNumber, socket}) => {
         username: username,
         room: roomNumber,
         id: player === 1 ? 2 : 1,
-        boardSize: tempSize
-      }
-      await socket.emit("change_of_turn", playerBody)
-      
+        boardSize: tempSize,
+      };
+      await socket.emit("change_of_turn", playerBody);
+
       // click時に1か2かいちいち消えないようにする
       setBoardSize(tempSize);
       console.log(tempSize, player);
     } else {
       // if elseにする事によって同じところをクリックしてもマークを変えないようにする
-      alert("Click an empty cells")
+      alert("Click an empty cells");
     }
   };
 
   return (
-    <div>
-      {boardSize.map((oneSquare, index) => (
-        <Square
-          oneSquare={oneSquare}
-          position={index}
-          handleClick={() => handleClick(index)}
-          key={index}
-        />
-      ))}
+    <div className="board_container">
+      <div className="board">
+        {boardSize.map((oneSquare, index) => (
+          <Square
+            oneSquare={oneSquare}
+            position={index}
+            handleClick={() => handleClick(index)}
+            key={index}
+          />
+        ))}
+      </div>
     </div>
   );
 };
