@@ -3,11 +3,13 @@ import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./Chat.css";
+import LeftRoomMsg from "./LeftRoomMsg";
 
-const Chat = ({ socket, username, setUsername, room, setRoom }) => {
+const Chat = ({ socket, username, room, }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  // const [isLeftRoom, setIsLeftRoom] = useState("");
+  const [leftPerson, setLeftPerson] = useState("");
+  const [isLeftRoom, setIsLeftRoom] = useState(false);
   const navigate = useNavigate();
 
   const handleSendMessage = async () => {
@@ -28,19 +30,32 @@ const Chat = ({ socket, username, setUsername, room, setRoom }) => {
     }
   };
 
-  const handleLeave = () => {
+  const handleLeave = async () => {
     navigate("/joinroom");
-    // window.location.reload();
-  }
+    const userData = {
+      username: username,
+      room: room,
+    };
+    
+    await socket.emit("disconnect_room", userData);
+    console.log(userData);
+  };
   
+  useEffect(() => {
+    socket.on("left_chat", (data) => {
+      setIsLeftRoom(true);
+      console.log(data.username);
+      setLeftPerson(data.username);
+    });
+    return () => socket.off("left_chat");
+    // eslint-disable-next-line 
+  }, []);
+
   useEffect(() => {
     socket.on("receive_message", (data) => {
       console.log(data);
       setMessageList((list) => [...list, data]);
     });
-    socket.on("left_chat", (data) => {
-      console.log(data)
-    })
     return () => socket.off("receive_message");
     // eslint-disable-next-line
   }, []);
@@ -51,7 +66,9 @@ const Chat = ({ socket, username, setUsername, room, setRoom }) => {
         <div className="chat-header">
           <p>Live Chat</p>
           <div>
-            <p className="leave" onClick={handleLeave}>Leave 👋🏻</p>
+            <p className="leave" onClick={handleLeave}>
+              Leave 👋🏻
+            </p>
           </div>
         </div>
 
@@ -74,6 +91,9 @@ const Chat = ({ socket, username, setUsername, room, setRoom }) => {
                 </div>
               </div>
             ))}
+            {isLeftRoom && (
+             <LeftRoomMsg leftPerson={leftPerson} />
+            )}
           </ScrollToBottom>
         </div>
         <div className="chat-footer">

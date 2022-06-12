@@ -108,6 +108,7 @@
   font-size: 12px;
 }
 
+/* message input as footer*/
 .chat-window .chat-footer {
   display: flex;
   justify-content: center;

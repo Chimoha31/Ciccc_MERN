@@ -31,11 +31,11 @@ io.on("connection", (socket) => {
   });
 
   // leave_chat
-  socket.on("disconnect", (data) => {
+  socket.on("disconnect_room", (data) => {
     console.log(data);
     socket.leave(data.room);
-    io.to(data.room).emit("left_chat", (data))
-    console.log(`${socket.id} has left the room`);
+    socket.to(data.room).emit("left_chat", (data))
+    console.log(`${socket.id} ${data.username} has left the room`);
   })
 })
 
