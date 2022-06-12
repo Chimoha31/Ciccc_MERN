@@ -9,7 +9,7 @@ const JoinForm = ({ socket, username, setUsername, room ,setRoom }) => {
 
   const handleJoinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
+      socket.emit("join_room", {username, room});
       navigate("/chatroom");
     }
   };

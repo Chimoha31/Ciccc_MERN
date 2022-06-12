@@ -3,11 +3,14 @@ import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./Chat.css";
+import IntoRoomMsg from "./IntoRoomMsg";
 import LeftRoomMsg from "./LeftRoomMsg";
 
-const Chat = ({ socket, username, room, }) => {
+const Chat = ({ socket, username, room }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [intoPerson, setIntoPerson] = useState("");
+  const [isIntoRoom, setIsIntoRoom] = useState(false);
   const [leftPerson, setLeftPerson] = useState("");
   const [isLeftRoom, setIsLeftRoom] = useState(false);
   const navigate = useNavigate();
@@ -36,11 +39,21 @@ const Chat = ({ socket, username, room, }) => {
       username: username,
       room: room,
     };
-    
+
     await socket.emit("disconnect_room", userData);
     console.log(userData);
   };
-  
+
+  useEffect(() => {
+    socket.on("into_room", (data) => {
+      setIsIntoRoom(true);
+      setIntoPerson(data.username);
+    });
+
+    return () => socket.off("into_room");
+    // eslint-disable-next-line
+  }, []);
+
   useEffect(() => {
     socket.on("left_chat", (data) => {
       setIsLeftRoom(true);
@@ -48,7 +61,7 @@ const Chat = ({ socket, username, room, }) => {
       setLeftPerson(data.username);
     });
     return () => socket.off("left_chat");
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -74,6 +87,8 @@ const Chat = ({ socket, username, room, }) => {
 
         <div className="chat-body">
           <ScrollToBottom className="message-container">
+            {isIntoRoom && <IntoRoomMsg intoPerson={intoPerson} />}
+
             {messageList.map((message, index) => (
               <div
                 key={index}
@@ -91,11 +106,8 @@ const Chat = ({ socket, username, room, }) => {
                 </div>
               </div>
             ))}
-            {isLeftRoom && (
-             <LeftRoomMsg leftPerson={leftPerson} />
-            )}
+            {isLeftRoom && <LeftRoomMsg leftPerson={leftPerson} />}
           </ScrollToBottom>
-        </div>
         <div className="chat-footer">
           <input
             type="text"
@@ -109,6 +121,7 @@ const Chat = ({ socket, username, room, }) => {
           <button onClick={handleSendMessage}>&#9658;</button>
         </div>
       </div>
+        </div>
     </Fragment>
   );
 };

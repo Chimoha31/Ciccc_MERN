@@ -20,8 +20,10 @@ io.on("connection", (socket) => {
   // console.log(`User Connected: ${socket.id}`);
   // join_room
   socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`)
+    socket.join(data.room);
+    console.log(`User with ID: ${socket.id} joined room: ${data.room}`)
+
+    socket.to(data.room).emit("into_room", (data));
   })
 
   // send_message
