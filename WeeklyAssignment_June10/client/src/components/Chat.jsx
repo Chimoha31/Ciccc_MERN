@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./Chat.css";
 
-const Chat = ({ socket, username, room }) => {
+const Chat = ({ socket, username, setUsername, room, setRoom }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   // const [isLeftRoom, setIsLeftRoom] = useState("");

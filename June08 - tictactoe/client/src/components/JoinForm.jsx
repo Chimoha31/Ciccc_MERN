@@ -9,15 +9,17 @@ const JoinForm = ({ showGame, setShowGame, socket }) => {
   const [roomNumber, setRoomNumber] = useState("");
   const [err, setErr] = useState("");
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     if (username !== "" && roomNumber !== "") {
       socket.emit("join_room", { username, roomNumber });
       setShowGame(true);
+
     }else if(username === "" || roomNumber === "") {
       // alert("To fill the blank is required !")
       setErr("Fill In the Blank")
     }
   };
+
   return (
     <Fragment>
       <Header />
@@ -51,13 +53,12 @@ const JoinForm = ({ showGame, setShowGame, socket }) => {
               {err && !roomNumber ? <p className="err_msg">{err}</p> : ""}
             </Form.Group>
             <div className="button w-75">
-            <Button onClick={handleClick}>Join Room</Button>
+            <Button onClick={handleSubmit}>Join Room</Button>
             </div>
           </Form>
         </div>
       ) : (
         <div>
-          <h2>Hello, {username}</h2>
           <Board socket={socket} username={username} roomNumber={roomNumber} />
         </div>
       )}

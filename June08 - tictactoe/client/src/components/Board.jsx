@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Square from "./Square";
 import "./Board.css";
+import { Button } from "react-bootstrap";
+import Square from "./Square";
+// import circle from '../image/circle.png';
+// import cross from '../image/cross.png';
 
 const Board = ({ username, roomNumber, socket }) => {
   const [boardSize, setBoardSize] = useState(new Array(9).fill(0));
   const [player, setPlayer] = useState(1);
+
 
   useEffect(() => {
     socket.on("receive_turn", (data) => {
@@ -72,8 +76,12 @@ const Board = ({ username, roomNumber, socket }) => {
     }
   };
 
+  const handleRefresh = () => {
+    setBoardSize(new Array(9).fill(0));
+  }
+
   return (
-    <div className="board_container">
+    <div className="board_container">    
       <div className="board">
         {boardSize.map((oneSquare, index) => (
           <Square
@@ -83,6 +91,7 @@ const Board = ({ username, roomNumber, socket }) => {
             key={index}
           />
         ))}
+        <Button variant="success" onClick={handleRefresh}>Refresh</Button>
       </div>
     </div>
   );
