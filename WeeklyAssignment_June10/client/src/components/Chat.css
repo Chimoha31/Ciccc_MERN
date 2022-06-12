@@ -153,11 +153,4 @@
 .hide {
   opacity: 0 !important;
 }
-@media (min-width: 1025px) {
-  .chat-window {
-    width: 100%;
-  }
-  .chat-window .chat-body {
-    height: 100%;
-  }
-}
+
