@@ -25,6 +25,9 @@ io.on("connection", (socket) => {
   socket.on("change_of_turn", (data) => {
     socket.to(data.room).emit("receive_turn", data);
   })
+  socket.on("count_turn", (data) => {
+    socket.to(data.room).emit("receive_count", data);
+  })
 })
 
 

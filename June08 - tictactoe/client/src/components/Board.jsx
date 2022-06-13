@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./Board.css";
 import { Button } from "react-bootstrap";
 import Square from "./Square";
+import PlayeWinner from "./PlayeWinner";
+import CountDown from './CountDown';
 // import circle from '../image/circle.png';
 // import cross from '../image/cross.png';
 
 const Board = ({ username, roomNumber, socket }) => {
   const [boardSize, setBoardSize] = useState(new Array(9).fill(0));
   const [player, setPlayer] = useState(1);
-
+  const [winner, setWinner] = useState("");
+  const [playerWin, setPlayerWin] = useState(false);
+  const [startCount, setStartCount] = useState(false)
+  const [showCountBtn, setShowCountBtn] = useState(false)
 
   useEffect(() => {
     socket.on("receive_turn", (data) => {
@@ -39,14 +44,15 @@ const Board = ({ username, roomNumber, socket }) => {
         boardSize[item[1]] === 1 &&
         boardSize[item[2]] === 1
       ) {
-        alert(`Player 1 won the game`);
+        
+        setPlayerWin(true)
       }
       if (
         boardSize[item[0]] === 2 &&
         boardSize[item[1]] === 2 &&
         boardSize[item[2]] === 2
-      ) {
-        alert(`Player 2 won the game`);
+        ) {
+          setPlayerWin(true)
       }
     }
     // eslint-disable-next-line
@@ -67,32 +73,45 @@ const Board = ({ username, roomNumber, socket }) => {
       };
       await socket.emit("change_of_turn", playerBody);
 
+      setStartCount(false);
+      setShowCountBtn(true);
       // click時に1か2かいちいち消えないようにする
       setBoardSize(tempSize);
       console.log(tempSize, player);
     } else {
       // if elseにする事によって同じところをクリックしてもマークを変えないようにする
-      alert("Click an empty cells");
+      alert("Start again!");
     }
   };
 
   const handleRefresh = () => {
     setBoardSize(new Array(9).fill(0));
-  }
+    handleClick();
+  };
+
 
   return (
-    <div className="board_container">    
-      <div className="board">
-        {boardSize.map((oneSquare, index) => (
-          <Square
-            oneSquare={oneSquare}
-            position={index}
-            handleClick={() => handleClick(index)}
-            key={index}
-          />
-        ))}
-        <Button variant="success" onClick={handleRefresh}>Refresh</Button>
+    <div className="board_container">
+      <div>
+        <CountDown  socket={socket} roomNumber={roomNumber} startCount={startCount} setStartCount={setStartCount} showCountBtn={showCountBtn} setShowCountBtn={setShowCountBtn} />
       </div>
+      {playerWin ? (
+        <PlayeWinner winner={winner} />
+      ) : (
+        <div className="board">
+          {boardSize.map((oneSquare, index) => (
+            <Square
+              oneSquare={oneSquare}
+              position={index}
+              handleClick={() => handleClick(index)}
+              key={index}
+            />
+          ))}
+          <Button variant="success" onClick={handleRefresh}>
+            Refresh
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
