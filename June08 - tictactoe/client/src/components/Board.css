@@ -25,6 +25,14 @@
   background: url("../image/cross.png");
 }
 
+.btn_container{
+  display: flex;
+}
+
+.btn {
+  margin: 1rem 2rem;
+}
+
 @media (min-width: 767px) {
   .board {
     width: 600px;

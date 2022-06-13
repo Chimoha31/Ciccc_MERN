@@ -3,7 +3,7 @@ import "./Board.css";
 import { Button } from "react-bootstrap";
 import Square from "./Square";
 import PlayeWinner from "./PlayeWinner";
-import CountDown from './CountDown';
+import CountDown from "./CountDown";
 // import circle from '../image/circle.png';
 // import cross from '../image/cross.png';
 
@@ -12,8 +12,9 @@ const Board = ({ username, roomNumber, socket }) => {
   const [player, setPlayer] = useState(1);
   const [winner, setWinner] = useState("");
   const [playerWin, setPlayerWin] = useState(false);
-  const [startCount, setStartCount] = useState(false)
-  const [showCountBtn, setShowCountBtn] = useState(false)
+  const [startCount, setStartCount] = useState(false);
+  const [showCountBtn, setShowCountBtn] = useState(false);
+  const [opponentState, setOpponentState] = useState("");
 
   useEffect(() => {
     socket.on("receive_turn", (data) => {
@@ -44,15 +45,14 @@ const Board = ({ username, roomNumber, socket }) => {
         boardSize[item[1]] === 1 &&
         boardSize[item[2]] === 1
       ) {
-        
-        setPlayerWin(true)
+        setPlayerWin(true);
       }
       if (
         boardSize[item[0]] === 2 &&
         boardSize[item[1]] === 2 &&
         boardSize[item[2]] === 2
-        ) {
-          setPlayerWin(true)
+      ) {
+        setPlayerWin(true);
       }
     }
     // eslint-disable-next-line
@@ -87,13 +87,43 @@ const Board = ({ username, roomNumber, socket }) => {
   const handleRefresh = () => {
     setBoardSize(new Array(9).fill(0));
     handleClick();
+    setOpponentState(false)
+    setStartCount(false);
+
+    const refresh = {
+      opponentState: opponentState,
+      room: roomNumber,
+      startCount: startCount
+    };
+    socket.emit("start_again", refresh)
   };
 
+  useEffect(() => {
+    socket.on("restart_game", (data) => {
+      console.log(data.opponentState)
+      setOpponentState(data.opponentState);
+      setStartCount(data.startCount);
+    })
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div className="board_container">
-      <div>
-        <CountDown  socket={socket} roomNumber={roomNumber} startCount={startCount} setStartCount={setStartCount} showCountBtn={showCountBtn} setShowCountBtn={setShowCountBtn} />
+      <div className="btn_container">
+        <CountDown
+          socket={socket}
+          roomNumber={roomNumber}
+          startCount={startCount}
+          setStartCount={setStartCount}
+          showCountBtn={showCountBtn}
+          setShowCountBtn={setShowCountBtn}
+          opponentState={opponentState}
+          setOpponentState={setOpponentState}
+          className="btn"
+          />
+         <Button variant="success" onClick={handleRefresh} className="btn">
+            Refresh
+          </Button>
       </div>
       {playerWin ? (
         <PlayeWinner winner={winner} />
@@ -107,9 +137,6 @@ const Board = ({ username, roomNumber, socket }) => {
               key={index}
             />
           ))}
-          <Button variant="success" onClick={handleRefresh}>
-            Refresh
-          </Button>
         </div>
       )}
     </div>

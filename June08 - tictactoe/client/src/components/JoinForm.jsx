@@ -7,12 +7,14 @@ import { Button, Form } from "react-bootstrap";
 const JoinForm = ({ showGame, setShowGame, socket }) => {
   const [username, setUsername] = useState("");
   const [roomNumber, setRoomNumber] = useState("");
+  const [showUsername, setShowUsername] = useState(false);
   const [err, setErr] = useState("");
 
   const handleSubmit = () => {
     if (username !== "" && roomNumber !== "") {
       socket.emit("join_room", { username, roomNumber });
       setShowGame(true);
+      setShowUsername(true);
 
     }else if(username === "" || roomNumber === "") {
       // alert("To fill the blank is required !")
@@ -22,7 +24,7 @@ const JoinForm = ({ showGame, setShowGame, socket }) => {
 
   return (
     <Fragment>
-      <Header />
+      <Header username={username} showUsername={showUsername} />
       {!showGame ? (
         <div className="form_container">
           <Form

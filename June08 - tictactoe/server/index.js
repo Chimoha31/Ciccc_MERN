@@ -28,6 +28,9 @@ io.on("connection", (socket) => {
   socket.on("count_turn", (data) => {
     socket.to(data.room).emit("receive_count", data);
   })
+  socket.on("start_again", (data) => {
+    socket.to(data.room).emit("restart_game", data);
+  })
 })
 
 
