@@ -45,14 +45,16 @@ const Board = ({ username, roomNumber, socket }) => {
         boardSize[item[1]] === 1 &&
         boardSize[item[2]] === 1
       ) {
-        setPlayerWin(true);
+        // setWinner({circle});
+        // setPlayerWin(true);
       }
       if (
         boardSize[item[0]] === 2 &&
         boardSize[item[1]] === 2 &&
         boardSize[item[2]] === 2
-      ) {
-        setPlayerWin(true);
+        ) {
+          // setWinner({cross});
+          // setPlayerWin(true);
       }
     }
     // eslint-disable-next-line
@@ -104,12 +106,13 @@ const Board = ({ username, roomNumber, socket }) => {
       setOpponentState(data.opponentState);
       setStartCount(data.startCount);
     })
+    return () => socket.off("restart_game");
     // eslint-disable-next-line
   }, [])
 
   return (
     <div className="board_container">
-      <div className="btn_container">
+      <div className="btn_container d-flex align-items-center justify-content-center">
         <CountDown
           socket={socket}
           roomNumber={roomNumber}

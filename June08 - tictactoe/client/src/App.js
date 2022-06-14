@@ -8,7 +8,7 @@ import {
   Route
 } from "react-router-dom";
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("http://localhost:8000");
 
 const App = () => {
   const [showGame, setShowGame] = useState(false);

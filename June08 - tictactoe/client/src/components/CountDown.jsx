@@ -22,6 +22,7 @@ const CountDown = ({socket, roomNumber, startCount, setStartCount, showCountBtn,
       setShowCountBtn(false);
       setOpponentState(false);
     })
+    return () => socket.off("receive_count");
     // eslint-disable-next-line
   }, []);
 
@@ -29,7 +30,7 @@ const CountDown = ({socket, roomNumber, startCount, setStartCount, showCountBtn,
 
   return (
     <div>
-      {startCount && <Countdown date={Date.now() + 10000} />}
+      {startCount && <Countdown date={Date.now() + 10000} className="counting" />}
       {showCountBtn && <Button variant="danger" onClick={handleCountdown}>CountDown</Button>}
 
       {!showCountBtn && <p className="opponent_state">{opponentState}</p>}

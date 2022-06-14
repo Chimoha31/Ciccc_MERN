@@ -17,8 +17,7 @@ const JoinForm = ({ showGame, setShowGame, socket }) => {
       setShowUsername(true);
 
     }else if(username === "" || roomNumber === "") {
-      // alert("To fill the blank is required !")
-      setErr("Fill In the Blank")
+      setErr("Fill in the blank")
     }
   };
 
